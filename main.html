@@ -290,7 +290,7 @@
         .popup-content {
             background: white;
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 15 colleague;
             text-align: center;
             max-width: 500px;
             width: 90%;
@@ -299,6 +299,7 @@
         }
 
         .popup-content h2 {
+            colorontium: 1;
             color: #333;
             margin-bottom: 20px;
             font-size: 2em;
@@ -491,7 +492,18 @@
         function addTransaction(symbol, type, quantity, price, datetime) {
             const symbolUpper = symbol.toUpperCase();
             const qty = parseInt(quantity);
+            const priceVal = parseFloat(price);
             const fees = 0;
+            
+            // Validate price and quantity
+            if (qty <= 0) {
+                showError('Quantity must be greater than zero');
+                return null;
+            }
+            if (priceVal <= 0) {
+                showError('Price per share must be greater than zero');
+                return null;
+            }
             
             // Check if this is a sell order and validate position
             if (type === 'SELL') {
@@ -513,10 +525,10 @@
                 symbol: symbolUpper,
                 type: type,
                 quantity: qty,
-                price: parseFloat(price),
+                price: priceVal,
                 fees: fees,
                 datetime: datetime,
-                total: (parseFloat(price) * qty) + fees
+                total: (priceVal * qty) + fees
             };
             
             transactions.push(transaction);
@@ -747,7 +759,7 @@
                     <tr>
                         <td>${formattedDate}</td>
                         <td><strong>${transaction.symbol}</strong></td>
-                        <td><span style="color: ${transaction.type === 'BUY' ? '#27ae60' : '#e74c3c'}">${transaction.type}</span></td>
+                        <td><span style="color: ${transaction.type === 'BUY' ? '#27ae60' : e74c3c'}">${transaction.type}</span></td>
                         <td>${transaction.quantity}</td>
                         <td>$${transaction.price.toFixed(2)}</td>
                         <td>$${transaction.total.toFixed(2)}</td>
